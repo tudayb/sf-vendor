@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:lang="http://www.springframework.org/schema/lang"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.1.RELEASE.xsd
+          http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.1.RELEASE.xsd
+          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.1.RELEASE.xsd
+          http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.0.1.RELEASE.xsd
+          http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.1.RELEASE.xsd
+          http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.1.RELEASE.xsd
+">
+
+    <bean id="connectionString" class="com.mongodb.MongoClientURI"> 
+        <constructor-arg value="mongodb://slantfreeAdmin:10152009@localhost:27017/slantfree-vendor-db"/> 
+    </bean> 
+    <bean id="mongoClient" class="com.mongodb.MongoClient"> 
+        <constructor-arg ref="connectionString"/> 
+    </bean> 
+    <bean id="datastore" factory-bean="morphia" factory-method="createDatastore"> 
+        <constructor-arg ref="mongoClient"/> 
+        <constructor-arg value="slantfree-vendor-db"/> 
+    </bean> 
+</beans>
