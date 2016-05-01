@@ -63,7 +63,7 @@ public class VendorDaoTest implements ApplicationContextAware {
 
     @Override
     public void setApplicationContext(ApplicationContext ac) throws BeansException {
-        dao = new VendorDAOImpl(Vendor.class, (Datastore) ac.getBean("datastore"));
+        dao = new VendorDAOImpl((Datastore) ac.getBean("datastore"));
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
          Assert.assertNotNull(dao);
    }

@@ -6,6 +6,7 @@
 package com.snapit.solutions.slantfree.entity;
 
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlRootElement;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
@@ -15,6 +16,7 @@ import org.mongodb.morphia.annotations.Id;
  * @author sudheerparasker
  */
 @Entity
+@XmlRootElement
 public class Vendor implements Serializable {
 
     private static final long serialVersionUID = 1L;

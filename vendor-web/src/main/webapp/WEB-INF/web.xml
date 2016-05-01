@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+<context-param>
+    <param-name>contextConfigLocation</param-name>
+        <!-- Can specify multiple config files here separated by commas, semi-colon or whitespace -->
+    <param-value>/WEB-INF/applicationContext.xml</param-value>
+  </context-param>
+
+  <!-- Load a parent ApplicationContext containing the service layer beans -->
+  <context-param>
+    <param-name>locatorFactorySelector</param-name>
+    <!-- This file is in the root of the EJB JAR file -->
+    <param-value>beanRefContext.xml</param-value>
+  </context-param>
+ 
+  <!-- SpringSource recommends a listener over a servlet for loading the context -->
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout> 
+    </session-config>
+    <servlet>   
+        <servlet-name>javax.ws.rs.core.Application</servlet-name>  
+    </servlet>  
+    <servlet-mapping>   
+        <servlet-name>javax.ws.rs.core.Application</servlet-name>   
+        <url-pattern>/rest/*</url-pattern>  
+    </servlet-mapping> 
+
+</web-app>

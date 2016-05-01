@@ -21,12 +21,17 @@ import org.springframework.stereotype.Repository;
 public class VendorDAOImpl extends BasicDAO<Vendor, ObjectId> implements VendorDAO {
     
     @Autowired
-    public VendorDAOImpl(Class<Vendor> entityClass, Datastore ds) {
-        super(entityClass, ds);
+    public VendorDAOImpl(Datastore ds) {
+        super(ds);
         ds.ensureIndexes(); //creates all defined with @Indexed
         ds.ensureCaps(); //creates all collections for @Entity(cap=@CappedAt(...))
     }
     
+    /**
+     *
+     * @return
+     */
+    @Override
     public List<Vendor> findAll() {
         return getDatastore().find( Vendor.class ).asList();
     }

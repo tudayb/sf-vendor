@@ -5,13 +5,15 @@
  */
 package com.snapit.solutions.slantfree.beans;
 
-import javax.ejb.Remote;
+import com.snapit.solutions.slantfree.entity.Vendor;
+import java.util.List;
+import javax.ejb.Local;
 
 /**
  *
  * @author sudheerparasker
  */
-@Remote
-public interface VendorSessionBeanRemote {
-    
+@Local
+public interface VendorSessionBeanLocal {
+    public List<Vendor> listAllVendors();
 }
