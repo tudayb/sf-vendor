@@ -13,6 +13,8 @@ import javax.interceptor.Interceptors;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
@@ -25,8 +27,7 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 @Path("/vendor/")
 public class VendorSessionBean implements VendorSessionBeanLocal {
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+   private static final Logger LOG = LogManager.getLogger(VendorSessionBean.class);
    @Autowired
     private VendorDAO vendorDao;
    // 
@@ -39,6 +40,7 @@ public class VendorSessionBean implements VendorSessionBeanLocal {
     @Produces({"application/json"})
     @Override
     public List<Vendor> listAllVendors() {
+        LOG.info("Findall");
         return vendorDao.findAll();
     }
 }

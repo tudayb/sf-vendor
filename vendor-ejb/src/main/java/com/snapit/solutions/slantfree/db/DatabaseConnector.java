@@ -7,10 +7,9 @@ package com.snapit.solutions.slantfree.db;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 
@@ -20,6 +19,7 @@ import org.mongodb.morphia.Morphia;
  */
 public class DatabaseConnector {
 
+    private static final Logger LOG = LogManager.getLogger(DatabaseConnector.class);
     private static final String DB_CONNECTION_URI = "mongodb://slantfreeAdmin:10152009@localhost:27017/slantfree-vendor-db";
     private static final String DB_NAME = "slantfree-vendor-db";
 
@@ -35,25 +35,10 @@ public class DatabaseConnector {
             // Now connect to your databases
             MongoDatabase db;
             db = mongoClient.getDatabase(DB_NAME);
-            System.out.println("Connect to database successfully");
-
-            MongoCollection coll = db.getCollection("vendor");
-            System.out.println("Collection mycol selected successfully");
-
-            FindIterable iterable = coll.find();
-            MongoCursor cursor = iterable.iterator();
-            int i = 1;
-
-            while (cursor.hasNext()) {
-                System.out.println("Inserted Document: " + i);
-                System.out.println(cursor.next());
-                i++;
-            }
-
-            System.out.println("Document deleted successfully");
+            LOG.info("Connect to database successfully");
             return db;
         } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            LOG.error(e.getClass().getName() + ": " + e.getMessage());
         }
         return null;
     }
@@ -78,6 +63,7 @@ public class DatabaseConnector {
 
         // create the Datastore connecting to the default port on the local host
         final Datastore datastore = morphia.createDatastore(getMongoClient(), DB_NAME);
+        LOG.info("Connect to database successfully");
         datastore.ensureIndexes(); //creates all defined with @Indexed
         datastore.ensureCaps(); //creates all collections for @Entity(cap=@CappedAt(...))
         return datastore;

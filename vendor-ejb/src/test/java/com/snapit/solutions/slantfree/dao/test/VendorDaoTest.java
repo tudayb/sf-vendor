@@ -6,7 +6,6 @@
 package com.snapit.solutions.slantfree.dao.test;
 
 import com.snapit.solutions.slantfree.dao.impl.VendorDAOImpl;
-import com.snapit.solutions.slantfree.entity.Vendor;
 import org.junit.Assert;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -16,7 +15,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mongodb.morphia.Datastore;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.test.context.ContextConfiguration;
