@@ -5,7 +5,7 @@
  */
 package com.snapit.solutions.slantfree.dao.test;
 
-import com.snapit.solutions.slantfree.dao.impl.VendorDAOImpl;
+import com.snapit.solutions.slantfree.dao.VendorDAO;
 import org.junit.Assert;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -13,10 +13,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mongodb.morphia.Datastore;
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -25,11 +22,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author sudheerparasker
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:com/snapit/solutions/slantfree/dao/test/MongoDBConnectionTest.xml")
-public class VendorDaoTest implements ApplicationContextAware {
+@ContextConfiguration(locations = { "classpath:service-applicationContext.xml", "classpath:com/snapit/solutions/slantfree/dao/test/MongoDBConnectionTest.xml" } )
+public class VendorDaoTest {
     
-    //s@Autowired
-    private VendorDAOImpl dao;
+    @Autowired
+    private VendorDAO vendorDAO;
     
     public VendorDaoTest() {
     }
@@ -55,14 +52,8 @@ public class VendorDaoTest implements ApplicationContextAware {
     //
     @Test
     public void hello() {
-        Assert.assertNotNull(dao);
-        Assert.assertEquals(dao.find().countAll(), 0);
+        Assert.assertNotNull(vendorDAO);
+        Assert.assertEquals(vendorDAO.find().countAll(), 0);
     }
 
-    @Override
-    public void setApplicationContext(ApplicationContext ac) throws BeansException {
-        dao = new VendorDAOImpl((Datastore) ac.getBean("datastore"));
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-         Assert.assertNotNull(dao);
-   }
 }
