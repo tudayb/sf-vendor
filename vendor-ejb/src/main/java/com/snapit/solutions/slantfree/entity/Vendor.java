@@ -15,7 +15,7 @@ import org.mongodb.morphia.annotations.Id;
  *
  * @author sudheerparasker
  */
-@Entity
+@Entity("vendor")
 @XmlRootElement
 public class Vendor implements Serializable {
 

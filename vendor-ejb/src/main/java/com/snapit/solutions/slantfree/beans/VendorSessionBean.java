@@ -8,6 +8,7 @@ package com.snapit.solutions.slantfree.beans;
 import com.snapit.solutions.slantfree.dao.VendorDAO;
 import com.snapit.solutions.slantfree.entity.Vendor;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
 import javax.ws.rs.GET;
@@ -38,6 +39,7 @@ public class VendorSessionBean implements VendorSessionBeanLocal {
     @GET
     @Path("all/")
     @Produces({"application/json"})
+    @RolesAllowed({"ROLE_USER"})
     @Override
     public List<Vendor> listAllVendors() {
         LOG.info("Findall");

@@ -6,6 +6,8 @@
 package com.snapit.solutions.slantfree.dao.test;
 
 import com.snapit.solutions.slantfree.dao.VendorDAO;
+import com.snapit.solutions.slantfree.entity.Vendor;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -53,7 +55,8 @@ public class VendorDaoTest {
     @Test
     public void hello() {
         Assert.assertNotNull(vendorDAO);
-        Assert.assertEquals(vendorDAO.find().countAll(), 0);
+        List<Vendor> vendorList = vendorDAO.findAll();
+        Assert.assertEquals(1, vendorList.size());
     }
 
 }

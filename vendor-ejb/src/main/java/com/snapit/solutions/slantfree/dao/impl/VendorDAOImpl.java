@@ -6,6 +6,7 @@
 package com.snapit.solutions.slantfree.dao.impl;
 
 import com.snapit.solutions.slantfree.dao.VendorDAO;
+import com.snapit.solutions.slantfree.db.DatabaseConnector;
 import com.snapit.solutions.slantfree.entity.Vendor;
 import java.util.List;
 import org.bson.types.ObjectId;
