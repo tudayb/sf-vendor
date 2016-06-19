@@ -1,10 +1,56 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-    <head>
-        <title>Start Page</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
+	<head>
+		<title>Hello AngularJS</title>
+		<!-- <script src="https://code.angularjs.org/1.5.6/angular.js"></script> -->
+                <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+
+              
+    	<script src="vendor.js"></script>
+        <script type='text/javascript'>
+            var app = angular.module("VendorManagement", []);
+             //Controller Part
+            app.controller("VendorManagementController", function($scope, $http) {
+                //Initialize page with default data which is blank in this example
+                $scope.vendors = [];
+                
+                _refreshPageData();
+                
+              function _refreshPageData() {
+                    $http({
+                        method : 'GET',
+                        url : 'rest/vendor/all'
+                    }).then(function successCallback(response) {
+                        console.log(response);
+                        $scope.vendors = response.data;
+                    }, function errorCallback(response) {
+                        console.log(response.statusText);
+                    });
+                }
+            });
+            
+    
+        </script>
+	</head>
+
+	<body ng-app="VendorManagement" ng-controller="VendorManagementController">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip</th>
+            </tr>
+ 
+            <tr ng-repeat="vendor in vendors">
+                <td>{{ vendor.name }}</td>
+                <td>{{ vendor.address1 }}</td>
+                <td>{{ vendor.city }}</td>
+                <td>{{ vendor.state }}</td>
+                <td>{{ vendor.zip }}</td>
+            </tr>
+ 
+        </table>
+	</body>
 </html>
