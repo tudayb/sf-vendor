@@ -1,56 +1,44 @@
-<!doctype html>
-<html>
-	<head>
-		<title>Hello AngularJS</title>
-		<!-- <script src="https://code.angularjs.org/1.5.6/angular.js"></script> -->
-                <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <title>AngularJS User Registration and Login Example</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+    <link href="app-content/app.css" rel="stylesheet" />
+</head>
+<body>
 
-              
-    	<script src="vendor.js"></script>
-        <script type='text/javascript'>
-            var app = angular.module("VendorManagement", []);
-             //Controller Part
-            app.controller("VendorManagementController", function($scope, $http) {
-                //Initialize page with default data which is blank in this example
-                $scope.vendors = [];
-                
-                _refreshPageData();
-                
-              function _refreshPageData() {
-                    $http({
-                        method : 'GET',
-                        url : 'rest/vendor/all'
-                    }).then(function successCallback(response) {
-                        console.log(response);
-                        $scope.vendors = response.data;
-                    }, function errorCallback(response) {
-                        console.log(response.statusText);
-                    });
-                }
-            });
-            
-    
-        </script>
-	</head>
+    <div class="jumbotron">
+        <div class="container">
+            <div class="col-sm-8 col-sm-offset-2">
+                <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+                <div ng-view></div>
+            </div>
+        </div>
+    </div>
+    <div class="credits text-center">
+        <p>
+            <a href="http://snapit.solutions">SnapIT Solutions</a>
+        </p>
+    </div>
 
-	<body ng-app="VendorManagement" ng-controller="VendorManagementController">
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Address</th>
-                <th>City</th>
-                <th>State</th>
-                <th>Zip</th>
-            </tr>
- 
-            <tr ng-repeat="vendor in vendors">
-                <td>{{ vendor.name }}</td>
-                <td>{{ vendor.address1 }}</td>
-                <td>{{ vendor.city }}</td>
-                <td>{{ vendor.state }}</td>
-                <td>{{ vendor.zip }}</td>
-            </tr>
- 
-        </table>
-	</body>
+    <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script src="//code.angularjs.org/1.2.20/angular.js"></script>
+    <script src="//code.angularjs.org/1.2.20/angular-route.js"></script>
+    <script src="//code.angularjs.org/1.2.13/angular-cookies.js"></script>
+
+    <script src="app.js"></script>
+    <script src="app-services/authentication.service.js"></script>
+    <script src="app-services/flash.service.js"></script>
+
+    <!-- Real user service that uses an api -->
+    <!-- <script src="app-services/user.service.js"></script> -->
+
+    <!-- Fake user service for demo that uses local storage -->
+    <script src="app-services/user.service.local-storage.js"></script>
+
+    <script src="home/home.controller.js"></script>
+    <script src="login/login.controller.js"></script>
+    <script src="register/register.controller.js"></script>
+</body>
 </html>
